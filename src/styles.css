@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+body::after {
+    content: "";
+    background-image: url('assets/images/mekongsandwiches.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.02;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
+  
+  

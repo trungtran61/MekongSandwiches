@@ -1,0 +1,109 @@
+<div class="modal-header bg-primary text-white">
+  <h4 class="modal-title pull-left">{{ menuItemOrder.name }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body clearfix">
+  <div class="row">
+    <div class='col-sm-12'>
+      <table class="table">
+        <tr>
+          <td>
+            <button class="btn btn-info mb-2" style='width: 120px;'>No</button>
+          </td>
+          <td>
+            <button class="btn btn-info mb-2" style='width: 120px;'>Extra</button>
+          </td>
+          <td>
+            <button class="btn btn-info mb-2" style='width: 120px;'>Less</button>
+          </td>
+          <td>
+            <button class="btn btn-info mb-2" style='width: 120px;'>Add</button>
+          </td>
+          <td>
+            <button class="btn btn-info mb-2" style='width: 120px;'>On The Side</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class='col-sm-10'>
+      <table class="table">
+        <tr>
+          <td>
+            <button class="btn" style='width: 120px;'>Pickle</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Cilantro</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Jalapeno</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Mayonaise</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Onion</button>
+          </td>
+        </tr>
+        <tr>
+
+          <td>
+            <button class="btn" style='width: 120px;'>Cucumber</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Salt &amp; Pepper</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Soy Sauce</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Head Cheese</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Pate</button>
+          </td>
+        </tr>
+        <tr>
+
+        </tr>
+        <tr>
+
+          <td>
+            <button class="btn" style='width: 120px;'>Meat</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Jambon</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Pork Belly</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Pork Roll</button>
+          </td>
+          <td>
+            <button class="btn" style='width: 120px;'>Egg</button>
+          </td>
+        </tr>
+        <tr>
+
+
+          <td>
+            <button class="btn" style='width: 120px;'>Veggie</button>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" tooltip="Save Instructions" (click)="addToOrder()">Close</button>
+  <button class="btn btn-default right" tooltip="exit without saving" (click)="closeModal()">Cancel</button>
+</div>
