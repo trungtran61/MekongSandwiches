@@ -10,7 +10,7 @@
       <table class="table">
         <tr>
           <td>
-            <button class="btn btn-info mb-2" style='width: 120px;'>No</button>
+            <button class="btn btn-info mb-2" style='width: 120px;' (click)="selectOption('no')">No</button>
           </td>
           <td>
             <button class="btn btn-info mb-2" style='width: 120px;'>Extra</button>
@@ -33,7 +33,7 @@
       <table class="table">
         <tr>
           <td>
-            <button class="btn" style='width: 120px;'>Pickle</button>
+            <button class="btn" style='width: 120px;' (click)="addOption('pickle')">Pickle</button>
           </td>
           <td>
             <button class="btn" style='width: 120px;'>Cilantro</button>
@@ -88,8 +88,6 @@
           </td>
         </tr>
         <tr>
-
-
           <td>
             <button class="btn" style='width: 120px;'>Veggie</button>
           </td>
@@ -104,6 +102,8 @@
   </div>
 </div>
 <div class="modal-footer">
+  <span>{{ selectedOptions.join(',') }}</span>
+  <span>click one of the top row's choices, then click one of the items below to add an option.</span>
   <button class="btn btn-primary" tooltip="Save Instructions" (click)="addToOrder()">Close</button>
   <button class="btn btn-default right" tooltip="exit without saving" (click)="closeModal()">Cancel</button>
 </div>

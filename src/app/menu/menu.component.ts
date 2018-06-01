@@ -70,6 +70,6 @@ export class MenuComponent implements OnInit {
 
   openMenuItemOptions(menuItem: MenuItem) {
     this.modalDataService.data = menuItem;
-    const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary' });
+    const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
   }
 }
