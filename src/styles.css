@@ -11,6 +11,25 @@ body::after {
     right: 0;
     position: absolute;
     z-index: -1;   
+  } 
+  
+  .messageContainer {
+    width: 22%;
+    border-radius: 5px;
+    border: 1px solid Black;
+    padding: 3px;
+    margin: 3px;
+    background: #A4D3EE;
+    overflow: visible;
+    position: relative;
+    float: left;
   }
   
-  
+  .x {
+      position: absolute;
+      border: 0;
+      background: #A4D3EE;
+      color: red;
+      top: 1px;
+      right: 1px;
+  }

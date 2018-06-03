@@ -68,7 +68,7 @@ export class MenuComponent implements OnInit {
     this.basketTotals = this.basketTotal.toFixed(2);
   }
 
-  openMenuItemOptions(menuItem: MenuItem) {
+  openBasketItemOptions(menuItem: BasketItem) {
     this.modalDataService.data = menuItem;
     const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
   }

@@ -1,109 +1,30 @@
 <div class="modal-header bg-primary text-white">
-  <h4 class="modal-title pull-left">{{ menuItemOrder.name }}</h4>
+  <h4 class="modal-title pull-left">{{ basketItem.name }}</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body clearfix">
-  <div class="row">
-    <div class='col-sm-12'>
-      <table class="table">
-        <tr>
-          <td>
-            <button class="btn btn-info mb-2" style='width: 120px;' (click)="selectOption('no')">No</button>
-          </td>
-          <td>
-            <button class="btn btn-info mb-2" style='width: 120px;'>Extra</button>
-          </td>
-          <td>
-            <button class="btn btn-info mb-2" style='width: 120px;'>Less</button>
-          </td>
-          <td>
-            <button class="btn btn-info mb-2" style='width: 120px;'>Add</button>
-          </td>
-          <td>
-            <button class="btn btn-info mb-2" style='width: 120px;'>On The Side</button>
-          </td>
-        </tr>
-      </table>
+  <div class="row mb-3 ml-2">
+    <div *ngFor='let option of options; let i = index' class="mr-2">
+      <button class="btn" [ngClass]="{ 'btn-primary': isActiveOption[i], 'btn-info': !isActiveOption[i] }" style='width: 120px;'
+        (click)="selectOption(option, i)">{{ option }}</button>
     </div>
   </div>
-  <div class="row">
-    <div class='col-sm-10'>
-      <table class="table">
-        <tr>
-          <td>
-            <button class="btn" style='width: 120px;' (click)="addOption('pickle')">Pickle</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Cilantro</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Jalapeno</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Mayonaise</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Onion</button>
-          </td>
-        </tr>
-        <tr>
-
-          <td>
-            <button class="btn" style='width: 120px;'>Cucumber</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Salt &amp; Pepper</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Soy Sauce</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Head Cheese</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Pate</button>
-          </td>
-        </tr>
-        <tr>
-
-        </tr>
-        <tr>
-
-          <td>
-            <button class="btn" style='width: 120px;'>Meat</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Jambon</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Pork Belly</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Pork Roll</button>
-          </td>
-          <td>
-            <button class="btn" style='width: 120px;'>Egg</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn" style='width: 120px;'>Veggie</button>
-          </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-
-      </table>
+  <div class="row mb-3 ml-2" >
+    <div *ngFor='let item of items; let i = index' class="mr-2 mt-2">
+      <button class="btn btn-default" style='width: 120px;' (click)="selectOptionItem(item, i)" [tooltip]="itemPrice[i]">{{ item }}</button>
     </div>
   </div>
 </div>
+<div class='row ml-2' *ngIf='selectedOptions && selectedOptions.length > 0'>
+  <div class="messageContainer" *ngFor='let option of selectedOptions; let i = index'>
+    <button class="x" (click)="removeSelectedOptionItem(i)" title="click to remove">x</button>{{ option.option + ' ' + option.item  }} {{ option.price > 0 ? '($' + option.price + ')': '' }}
+  </div>
+</div>
+
 <div class="modal-footer">
-  <span>{{ selectedOptions.join(',') }}</span>
   <span>click one of the top row's choices, then click one of the items below to add an option.</span>
-  <button class="btn btn-primary" tooltip="Save Instructions" (click)="addToOrder()">Close</button>
-  <button class="btn btn-default right" tooltip="exit without saving" (click)="closeModal()">Cancel</button>
+  <button class="btn btn-primary" title="Save Instructions" (click)="saveOptions()">Save</button>
+  <button class="btn btn-default right" title="exit without saving" (click)="closeModal()">Cancel</button>
 </div>

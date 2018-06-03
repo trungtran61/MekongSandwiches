@@ -13,7 +13,6 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ModalDataService } from './shared/modal-data.service';
 import { MenuModule } from './menu/menu.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +26,7 @@ import { MenuModule } from './menu/menu.module';
     AppRoutingModule,
     FormsModule,
     MenuModule,
-    ModalModule.forRoot() 
+    ModalModule.forRoot()
   ],
   providers: [BsModalService, ModalDataService],  
   bootstrap: [AppComponent]  
