@@ -18,7 +18,7 @@ export class BasketItem
     name: string = "";    
     price: number = 4.35;    
     qty: number = 0; 
-    instructions: string = '';       
+    instructions: ItemOption[];       
 }
 
 export class ItemOption {

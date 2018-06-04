@@ -72,4 +72,19 @@ export class MenuComponent implements OnInit {
     this.modalDataService.data = menuItem;
     const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
   }
+
+  formatInstructions(basketItem: BasketItem)
+  {
+    let instructions: string = '';
+
+    if (basketItem.instructions)
+    {
+      for(let i = 0; i < basketItem.instructions.length; i++) {
+        instructions += basketItem.instructions[i].option + ' ' + basketItem.instructions[i].item +  (i < basketItem.instructions.length -1 ? ', ' : '');
+      }      
+      return instructions;
+    }
+    else
+      return '';
+  }
 }

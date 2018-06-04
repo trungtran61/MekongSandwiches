@@ -12,6 +12,7 @@ import { MenuItemOptionsComponent } from './menu/menu-item-options.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ModalDataService } from './shared/modal-data.service';
 import { MenuModule } from './menu/menu.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MenuModule } from './menu/menu.module';
     AppRoutingModule,
     FormsModule,
     MenuModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TooltipModule.forRoot() 
   ],
   providers: [BsModalService, ModalDataService],  
   bootstrap: [AppComponent]  

@@ -1,5 +1,7 @@
-<div class="container">
-  <div style='margin-top: 40px;'>
+<div class="container mb-3 mt-3">
+  <div class="card">
+  <div class="card-header"><img src='assets/images/mekongsandwiches.PNG' style='height:40px'><strong>Our Menu</strong></div>
+  <div class="card-body">
     <div style='float: left; width: 50%;'>
       <div *ngFor='let menuItem of menuItems1' class='mb-3'>
         <div class="row">
@@ -53,11 +55,11 @@
     </div>
   </div>
 </div>
-
+</div>
 
 <div class="container" *ngIf='basketItems != null'>
   <div class='card' style='float: left; width: 80%;'>
-    <div class="card-header"><img src='/dist/assets/images/mekongsandwiches.png' style='height:60px'><strong>Your Basket</strong></div>
+    <div class="card-header"><img src='assets/images/mekongsandwiches.PNG' style='height:40px'><strong>Your Basket</strong></div>
     <div class="card-body">
       <table class="table table-striped">
         <thead>
@@ -90,9 +92,10 @@
               </div>
             </td>
             <td>
-                <button class="btn btn-default" (click)='openBasketItemOptions(basketItem)' >Special Instructions</button>
+                <button class="btn btn-default" (click)='openBasketItemOptions(basketItem)' [tooltip]="formatInstructions(basketItem)">Special Instructions</button>
             </td>
-          </tr>
+          </tr>       
+         
         </tbody>
       </table>
       <div class="card-footer">

@@ -33,3 +33,14 @@ body::after {
       top: 1px;
       right: 1px;
   }
+
+  .modal.fade {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+.modal-dialog {
+    vertical-align:middle;
+    height:18em;
+    background-color: rgba(0,0,0,0.5); 
+}

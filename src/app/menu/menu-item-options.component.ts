@@ -49,6 +49,9 @@ export class MenuItemOptionsComponent implements OnInit {
   ngOnInit() {
     this.basketItem = this.modalDataService.data;
 
+    if (this.basketItem.instructions)
+      this.selectedOptions = this.basketItem.instructions;
+
     for (let i in this.isActiveOption) {
       this.isActiveOption.push(false);
     }
@@ -109,7 +112,8 @@ export class MenuItemOptionsComponent implements OnInit {
   }
 
   saveOptions() {
-    this.basketItem.instructions = JSON.stringify(this.selectedOptions);
+    this.basketItem.instructions = this.selectedOptions;
+    this.modalDataService.data = this.basketItem;
     this.bsModalRef.hide();
     this.router.navigate(['/menu']);
   }
