@@ -3,6 +3,7 @@ import { ModalDataService } from '../shared/modal-data.service';
 import { MenuItem, BasketItem, ItemOption } from './menu';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { BasketService } from './basket.service';
 
 @Component({
   selector: 'app-menu-item-options',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class MenuItemOptionsComponent implements OnInit {
 
   constructor(private modalDataService: ModalDataService,
-    private bsModalRef: BsModalRef,
+    private bsModalRef: BsModalRef, private basketService: BasketService,
     private router: Router) { }
 
   options = ['No', 'Extra', 'Less', 'Add', 'On The Side'];

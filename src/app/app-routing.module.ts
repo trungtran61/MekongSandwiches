@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { MenuComponent } from './menu/menu.component';
+import { MainComponent } from './menu/main.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { ContactComponent } from './contact.component';
 
@@ -11,15 +11,15 @@ const routes: Routes = [
     component: HomeComponent
   },
   { 
-    path: 'menu', 
-    component: MenuComponent
+    path: 'main', 
+    component: MainComponent
   },
   { 
     path: 'contact', 
     component: ContactComponent
   },  
   {
-    path: '', redirectTo: 'menu', pathMatch: 'full'
+    path: '', redirectTo: 'main', pathMatch: 'full'
   },
   {
     path: '**', component: PageNotFoundComponent

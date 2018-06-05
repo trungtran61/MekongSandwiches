@@ -1,112 +1,61 @@
 <div class="container mb-3 mt-3">
   <div class="card">
-  <div class="card-header"><img src='assets/images/mekongsandwiches.PNG' style='height:40px'><strong>Our Menu</strong></div>
-  <div class="card-body">
-    <div style='float: left; width: 50%;'>
-      <div *ngFor='let menuItem of menuItems1' class='mb-3'>
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="row">
-              <div class="col-sm-6">
-                <strong>{{ '#' + menuItem.id + ' - ' + menuItem.name }}</strong>
-              </div>
-              <div class="col-sm-2">
-                <strong>{{ '$' + menuItem.price }}</strong>
-              </div>
-            </div>
-            {{ menuItem.description }}
-          </div>
-          <div class="col-sm-3">
-            <div class="input-group mb-3 order">
-              <input type='text' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
-              <div class="input-group-append" (click)='orderItem(menuItem)'>
-                <span class="input-group-text">Order</span>
-                <i class="fa fa-user-circle-o"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="card-header">
+      <img src='assets/images/mekongsandwiches.PNG' style='height:40px'>
+      <strong>Our Menu</strong>
     </div>
-    <div style='float: left; width: 50%'>
-      <div *ngFor='let menuItem of menuItems2' class='mb-3'>
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="row">
-              <div class="col-sm-6">
-                <strong>{{ '#' + menuItem.id + ' - ' + menuItem.name }}</strong>
-              </div>
-              <div class="col-sm-2">
-                <strong>{{ '$' + menuItem.price }}</strong>
-              </div>
-            </div>
-            {{ menuItem.description }}
-          </div>
-          <div class="col-sm-3">
-            <div class="input-group mb-3 order">
-              <input type='text' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty'  />
-              <div class="input-group-append" (click)='orderItem(menuItem)'>
-                <span class="input-group-text">Order</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="container" *ngIf='basketItems != null'>
-  <div class='card' style='float: left; width: 80%;'>
-    <div class="card-header"><img src='assets/images/mekongsandwiches.PNG' style='height:40px'><strong>Your Basket</strong></div>
     <div class="card-body">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Ext Price</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let basketItem of basketItems; let i = index'>
-            <td>
-              <strong>{{ '#' + basketItem.id + ' - ' + basketItem.name }}</strong>
-            </td>
-            <td>{{ '$' + basketItem.price }}</td>
-            <td>{{ basketItem.qty }}</td>
-            <td>
-              <strong>{{ '$' + (basketItem.price * basketItem.qty) }}</strong>
-            </td>
-            <td>
-              <div class="input-group">
-                <input type='text' style="width: .5em" class="form-control" [(ngModel)]='basketItem.qty' (change)='updateQty(i)'/>
-                <div class="input-group-append" (click)='removeItem(i)'>
-                  <span class="input-group-text">Remove</span>
+      <div style='float: left; width: 50%;'>
+        <div *ngFor='let menuItem of menuItems1' class='mb-3'>
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-6">
+                  <strong>{{ '#' + menuItem.id + ' - ' + menuItem.name }}</strong>
+                </div>
+                <div class="col-sm-2">
+                  <strong>{{ '$' + menuItem.price }}</strong>
+                </div>
+              </div>
+              {{ menuItem.description }}
+            </div>
+            <div class="col-sm-3">
+              <div class="input-group mb-3 order">
+                <input type='text' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
+                <div class="input-group-append" (click)='orderItem(menuItem)'>
+                  <span class="input-group-text">Order</span>
                   <i class="fa fa-user-circle-o"></i>
                 </div>
               </div>
-            </td>
-            <td>
-                <button class="btn btn-default" (click)='openBasketItemOptions(basketItem)' [tooltip]="formatInstructions(basketItem)">Special Instructions</button>
-            </td>
-          </tr>       
-         
-        </tbody>
-      </table>
-      <div class="card-footer">
-        <div class="row">
-          <div class='col-sm-10'>
-        <strong>Totals (includes tax): {{ '$' + basketTotals }}</strong>
-        </div>
-        <div class='col-sm-2'>
-        <button class="btn btn-primary">Submit Order</button>
+            </div>
+          </div>
         </div>
       </div>
-      </div>      
+      <div style='float: left; width: 50%'>
+        <div *ngFor='let menuItem of menuItems2' class='mb-3'>
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-6">
+                  <strong>{{ '#' + menuItem.id + ' - ' + menuItem.name }}</strong>
+                </div>
+                <div class="col-sm-2">
+                  <strong>{{ '$' + menuItem.price }}</strong>
+                </div>
+              </div>
+              {{ menuItem.description }}
+            </div>
+            <div class="col-sm-3">
+              <div class="input-group mb-3 order">
+                <input type='text' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
+                <div class="input-group-append" (click)='orderItem(menuItem)'>
+                  <span class="input-group-text">Order</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>

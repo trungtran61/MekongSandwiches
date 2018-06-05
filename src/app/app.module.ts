@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { ContactComponent } from './contact.component';
@@ -13,11 +12,12 @@ import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ModalDataService } from './shared/modal-data.service';
 import { MenuModule } from './menu/menu.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { MainComponent } from './menu/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
+    MainComponent,
     HomeComponent,
     PageNotFoundComponent,
     ContactComponent    
