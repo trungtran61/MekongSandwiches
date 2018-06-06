@@ -116,6 +116,6 @@ export class MenuItemOptionsComponent implements OnInit {
     this.basketItem.instructions = this.selectedOptions;
     this.modalDataService.data = this.basketItem;
     this.bsModalRef.hide();
-    this.router.navigate(['/menu']);
+    this.router.navigate(['/main']);
   }
 }

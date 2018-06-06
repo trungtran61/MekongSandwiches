@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { MenuItemOptionsComponent } from './menu-item-options.component';
 import { BasketService } from './basket.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -12,30 +13,31 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent implements OnInit, OnDestroy {
-  
+
   subscription: Subscription;
   basketItems: BasketItem[] = [];
   basketTotal: number = 0;
   basketTotals: string = '';
   message: string;
-  
+
   constructor(private modalService: BsModalService,
     private modalDataService: ModalDataService,
-    private basketService: BasketService) {
+    private basketService: BasketService,   
+    private router: Router) {
 
-      this.subscription = this.basketService.getMessage().subscribe(basketItem => { 
-        //console.log(basketItem);
-        this.addToBasket(basketItem.basketItem);
-      });
-     }
-
-    ngOnDestroy() {
-      // unsubscribe to ensure no memory leaks
-      this.subscription.unsubscribe();
+    this.subscription = this.basketService.getMessage().subscribe(basketItem => {
+      //console.log(basketItem);
+      this.addToBasket(basketItem.basketItem);
+    });
   }
 
-  ngOnInit() {   
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
 
+  ngOnInit() {
+    console.log(this.router.url);
     this.basketItems = JSON.parse(localStorage.getItem("MekongSandwichesBasket"));
 
     if (!this.basketItems)
@@ -53,19 +55,18 @@ export class BasketComponent implements OnInit, OnDestroy {
     if (this.basketItems[index].qty == 0) {
       this.removeItem(index);
     }
-    else
-    {
+    else {
       this.calculateTotals();
     }
   }
-  
-   addToBasket(basketItem: BasketItem) {
+
+  addToBasket(basketItem: BasketItem) {
     //let basketItem: BasketItem = Object.assign(new BasketItem(), menuItem);
     console.log(basketItem);
-    this.basketItems.push(basketItem);    
-    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));      
-  } 
- 
+    this.basketItems.push(basketItem);
+    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
+  }
+
   calculateTotals() {
     this.basketTotal = 0;
     this.basketItems.forEach(x => this.basketTotal += x.qty * x.price);
@@ -78,18 +79,21 @@ export class BasketComponent implements OnInit, OnDestroy {
     const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
   }
 
-  formatInstructions(basketItem: BasketItem)
-  {
+  formatInstructions(basketItem: BasketItem) {
     let instructions: string = '';
 
-    if (basketItem.instructions)
-    {
-      for(let i = 0; i < basketItem.instructions.length; i++) {
-        instructions += basketItem.instructions[i].option + ' ' + basketItem.instructions[i].item +  (i < basketItem.instructions.length -1 ? ', ' : '');
-      }      
+    if (basketItem.instructions) {
+      for (let i = 0; i < basketItem.instructions.length; i++) {
+        instructions += basketItem.instructions[i].option + ' ' + basketItem.instructions[i].item + (i < basketItem.instructions.length - 1 ? ', ' : '');
+      }
       return instructions;
     }
     else
       return '';
+  }
+
+  checkOut()
+  {
+    this.router.navigate(['/checkout']);
   }
 }

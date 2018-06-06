@@ -13,15 +13,15 @@
                 <div class="col-sm-6">
                   <strong>{{ '#' + menuItem.id + ' - ' + menuItem.name }}</strong>
                 </div>
-                <div class="col-sm-2">
-                  <strong>{{ '$' + menuItem.price }}</strong>
+                <div class="col-sm-3">
+                  <strong>{{ menuItem.price | number: '1.2-2' | currency:'USD' }}</strong>
                 </div>
               </div>
               {{ menuItem.description }}
             </div>
             <div class="col-sm-3">
               <div class="input-group mb-3 order">
-                <input type='text' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
+                <input type='number' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
                 <div class="input-group-append" (click)='orderItem(menuItem)'>
                   <span class="input-group-text">Order</span>
                   <i class="fa fa-user-circle-o"></i>
@@ -39,8 +39,8 @@
                 <div class="col-sm-6">
                   <strong>{{ '#' + menuItem.id + ' - ' + menuItem.name }}</strong>
                 </div>
-                <div class="col-sm-2">
-                  <strong>{{ '$' + menuItem.price }}</strong>
+                <div class="col-sm-3">
+                  <strong>{{ menuItem.price | number: '1.2-2' | currency:'USD' }}</strong>
                 </div>
               </div>
               {{ menuItem.description }}

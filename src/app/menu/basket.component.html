@@ -21,14 +21,14 @@
             <td>
               <strong>{{ '#' + basketItem.id + ' - ' + basketItem.name }}</strong>
             </td>
-            <td>{{ '$' + basketItem.price }}</td>
+            <td>{{ basketItem.price | number: '1.2-2' | currency:'USD' }}</td>
             <td>{{ basketItem.qty }}</td>
-            <td>
-              <strong>{{ '$' + (basketItem.price * basketItem.qty) }}</strong>
+            <td style="text-align: right;">
+              <strong>{{ (basketItem.price * basketItem.qty) | number: '1.2-2' | currency:'USD' }}</strong>
             </td>
             <td>
               <div class="input-group">
-                <input type='text' style="width: .5em" class="form-control" [(ngModel)]='basketItem.qty' (change)='updateQty(i)' />
+                <input type='number' style="width: 2em" class="form-control" [(ngModel)]='basketItem.qty' (change)='updateQty(i)' />
                 <div class="input-group-append" (click)='removeItem(i)'>
                   <span class="input-group-text">Remove</span>
                   <i class="fa fa-user-circle-o"></i>
@@ -45,19 +45,13 @@
       <div class="card-footer">
         <div class="row">
           <div class='col-sm-10'>
-            <strong>Totals (includes tax): {{ '$' + basketTotals }}</strong>
+            <strong>Totals (includes tax): {{ basketTotals | number: '1.2-2' | currency:'USD' }}</strong>
           </div>
           <div class='col-sm-2'>
-            <button class="btn btn-primary">Submit Order</button>
+            <button class="btn btn-primary" (click)='checkOut()' *ngIf="router.url != '/checkout'">Check Out</button>            
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="event">
-    <h5>{{ event.name }}</h5>
-    <p>{{ event.location }}</p>
-    <button class="btn btn-success">Going</button>
-    <button class="btn btn-danger">Not going</button>
 </div>

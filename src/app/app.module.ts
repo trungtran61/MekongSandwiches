@@ -10,17 +10,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { MenuItemOptionsComponent } from './menu/menu-item-options.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ModalDataService } from './shared/modal-data.service';
-import { MenuModule } from './menu/menu.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { MainComponent } from './menu/main.component';
+import { MenuModule } from './menu/menu.module';
+import { CustomFormsModule } from 'ng2-validation'
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     HomeComponent,
     PageNotFoundComponent,
-    ContactComponent    
+    ContactComponent        
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,8 @@ import { MainComponent } from './menu/main.component';
     FormsModule,
     MenuModule,
     ModalModule.forRoot(),
-    TooltipModule.forRoot() 
+    TooltipModule.forRoot(),
+    CustomFormsModule 
   ],
   providers: [BsModalService, ModalDataService],  
   bootstrap: [AppComponent]  
