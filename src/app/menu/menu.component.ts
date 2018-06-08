@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { MENU_ITEM_DATA } from './menu-item-data';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MenuItem, BasketItem } from './menu';
 import { MenuItemOptionsComponent } from './menu-item-options.component';
 import { ModalDataService } from '../shared/modal-data.service';

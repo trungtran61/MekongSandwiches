@@ -4,7 +4,7 @@ import { ModalDataService } from '../shared/modal-data.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MenuItemOptionsComponent } from './menu-item-options.component';
 import { BasketService } from './basket.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({

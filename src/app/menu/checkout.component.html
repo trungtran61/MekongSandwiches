@@ -1,24 +1,40 @@
-<form (ngSubmit)='submitOrder()' #checkoutForm='ngForm' novalidate>
+<form #checkoutForm='ngForm' novalidate>
   <div class="container mb-2 form-group">
     <div class='card' style='float: left; width: 80%;'>
       <div class='card-body'>
-        <div class="row">
+        <div class="row mb-3">
           <div class="col-md-6">
             <label for="name">Name</label>
-            <input type="text" class="form-control input-sm" name="name" placeholder="Name" required [(ngModel)]='name' >
+            <input type="text" class="form-control input-sm" name="name" placeholder="Name" required [(ngModel)]='name'>
             <p *ngIf="checkoutForm.controls.name.invalid && checkoutForm.controls.name.touched">Name is required</p>
           </div>
           <div class="col-md-3">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control input-sm" name="phone" placeholder="Phone" required [(ngModel)]='phone' 
-              pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$">
+            <input type="text" class="form-control input-sm" name="phone" placeholder="Phone" required [(ngModel)]='phone' pattern="^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$">
             <p *ngIf="checkoutForm.controls.phone.invalid && checkoutForm.controls.phone.touched">Phone is invalid</p>
           </div>
-          <div class='col-sm-2'>
-            <label for="btnSubmit">&nbsp;</label>
-            <button class="btn btn-primary" type="submit" [disabled]='checkoutForm.invalid'>Submit Order</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="pickUpTime">Estimated Pick-up Time</label>
+            <timepicker [(ngModel)]="pickUpTime" name="pickUpTime"></timepicker>
+            <p *ngIf="checkoutForm.controls.pickUpTime.invalid && checkoutForm.controls.pickUpTime.touched">Pick-up Time is required</p>
+          </div>
+          <div class="col-md-3">
+            <label for="pickUpTime">Pick-up Date</label>
+            <input type="text" class="form-control input-sm" #dp="bsDatepicker" bsDatepicker [bsValue]="pickUpDate">
           </div>
         </div>
+        <div class="row">
+          <div class='col-sm-2'>
+            <label for="btnSubmit">&nbsp;</label>
+            <button class="btn btn-primary" type="button" (click)='submitOrder()' [disabled]='checkoutForm.invalid'>Submit Order</button>
+          </div>
+        </div>
+      </div>
+      <div class='card-footer'>
+          <span class="label label-success">{{ infoMessage }}</span>
+          <span class="label label-danger">{{ errorMessage }}</span>
       </div>
     </div>
   </div>

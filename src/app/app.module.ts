@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
@@ -11,6 +12,7 @@ import { MenuItemOptionsComponent } from './menu/menu-item-options.component';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ModalDataService } from './shared/modal-data.service';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 import { MenuModule } from './menu/menu.module';
 import { CustomFormsModule } from 'ng2-validation'
 
@@ -26,6 +28,7 @@ import { CustomFormsModule } from 'ng2-validation'
     AppRoutingModule,
     FormsModule,
     MenuModule,
+    HttpClientModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
     CustomFormsModule 

@@ -44,3 +44,7 @@ body::after {
     height:18em;
     background-color: rgba(0,0,0,0.5); 
 }
+label
+{
+    font-weight: bold;
+}
