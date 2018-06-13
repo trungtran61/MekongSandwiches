@@ -48,3 +48,10 @@ export interface APIResponse
     ResponseCode: number;
     ResponseText: string;
 }
+
+export enum OrderStatus
+{
+    'New',
+    'Sent to Kitchen',
+    'Processed'
+}

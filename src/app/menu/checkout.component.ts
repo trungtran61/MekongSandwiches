@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketItem, Order, OrderItem } from './menu';
+import { BasketItem, Order, OrderItem, ItemOption } from './menu';
 import { MenuService } from './menu.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class CheckoutComponent implements OnInit {
     let orderItems: OrderItem[] = JSON.parse(localStorage.getItem("MekongSandwichesBasket"));
     console.log(orderItems);
     let order: Order = new Order();
-    order.id = 5;
+    //order.id = 5;
     order.name = this.name;
     order.phone = this.phone;
     order.pickUpTime = this.pickUpTime;
@@ -35,10 +35,21 @@ export class CheckoutComponent implements OnInit {
 
     orderItems.forEach(function (orderItem) {
       let item: OrderItem = new OrderItem();
-      item.id = 0;
-      item.name = orderItem.name; 
+      item.id = orderItem.id;
+      item.name = orderItem.name;
+      item.qty = orderItem.qty;
+      let instructions: ItemOption[] = [];
+      if (orderItem.instructions) {
+        orderItem.instructions.forEach(function (instruction) {
+          instructions.push(instruction);
+        }
+        );
+        item.instructions = instructions;
+      }
       order.orderItems.push(item);
     });
+
+    console.log(order);
 
     this.orderService.addOrder(order)
       .subscribe(
