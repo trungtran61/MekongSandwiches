@@ -29,7 +29,8 @@ export class CheckoutComponent implements OnInit {
     //order.id = 5;
     order.name = this.name;
     order.phone = this.phone;
-    order.pickUpTime = this.pickUpTime;
+    order.pickUpTime = this.pickUpTime.toTimeString();
+    console.log(order.pickUpTime);
     order.pickUpDate = this.pickUpDate;
     order.orderItems = [];
 

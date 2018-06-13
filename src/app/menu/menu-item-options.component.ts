@@ -75,8 +75,7 @@ export class MenuItemOptionsComponent implements OnInit {
     }
 
     this.isActiveOption[index] = true;
-    this.selectedOption = option;
-    console.log(this.selectedOption);
+    this.selectedOption = option;    
   }
 
   selectOptionItem(item: string, index) {

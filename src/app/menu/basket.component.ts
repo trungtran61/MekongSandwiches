@@ -48,6 +48,7 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   removeItem(index: number) {
     this.basketItems.splice(index, 1);
+    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
     this.calculateTotals();
   }
 
@@ -58,6 +59,7 @@ export class BasketComponent implements OnInit, OnDestroy {
     else {
       this.calculateTotals();
     }
+    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
   }
 
   addToBasket(basketItem: BasketItem) {
@@ -94,6 +96,7 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   checkOut()
   {
+    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
     this.router.navigate(['/checkout']);
   }
 }

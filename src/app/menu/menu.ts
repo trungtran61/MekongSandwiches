@@ -30,7 +30,7 @@ export class Order {
     id: number;
     name: string;
     phone: string;
-    pickUpTime: Date;
+    pickUpTime: string;
     pickUpDate: Date;
     orderItems: OrderItem[];
 }
