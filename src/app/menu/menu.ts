@@ -18,6 +18,7 @@ export class BasketItem {
     price: number = 4.35;
     qty: number = 0;
     instructions: ItemOption[];
+    index: number;
 }
 
 export class ItemOption {

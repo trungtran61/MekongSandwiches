@@ -29,7 +29,13 @@
           <div class='col-sm-2'>
             <label for="btnSubmit">&nbsp;</label>
             <button class="btn btn-primary" type="button" (click)='submitOrder()' [disabled]='checkoutForm.invalid'>Submit Order</button>
-          </div>
+          </div>          
+        </div>
+        <div class="row mt-2">
+          <div class='col-sm-8'>
+            <label for="chkSaveOrder">
+            <input type="checkbox" id='chkSaveOrder' [(ngModel)]='saveOrder' checked="true" name="saveOrder" /> Save basket for future orders.</label> 
+          </div>          
         </div>
       </div>
       <div class='card-footer'>

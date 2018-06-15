@@ -5,16 +5,29 @@ import { BasketItem } from './menu';
 @Injectable()
 export class BasketService {
     private subject = new Subject<any>();
+    private instructionSubject = new Subject<any>();
  
-    sendMessage(basketItem: BasketItem) {
+    sendMenuItem(basketItem: BasketItem) {
         this.subject.next({ basketItem });
-    }
+    }  
  
     clearMessage() {
         this.subject.next();
     }
  
-    getMessage(): Observable<any> {
+    getMenuItem(): Observable<any> {
         return this.subject.asObservable();
+    }
+
+    sendInstructions(basketItem: BasketItem) {
+        this.instructionSubject.next({ basketItem });
+    }
+
+    getInstructions(): Observable<any> {
+        return this.instructionSubject.asObservable();
+    }
+
+    clearInstructions() {
+        this.instructionSubject.next();
     }
 }

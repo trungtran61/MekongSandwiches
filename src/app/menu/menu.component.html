@@ -1,4 +1,4 @@
-<div class="container mb-3 mt-3">
+<div class="container mb-3 mt-3" style='font-size: .9em'>
   <div class="card">
     <div class="card-header">
       <img src='assets/images/mekongsandwiches.PNG' style='height:40px'>
@@ -23,7 +23,7 @@
               <div class="input-group mb-3 order">
                 <input type='number' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
                 <div class="input-group-append" (click)='orderItem(menuItem)'>
-                  <span class="input-group-text">Order</span>
+                  <span class="input-group-text" style='font-size: .7em; font-weight: bold'>Order</span>
                   <i class="fa fa-user-circle-o"></i>
                 </div>
               </div>
@@ -47,9 +47,9 @@
             </div>
             <div class="col-sm-3">
               <div class="input-group mb-3 order">
-                <input type='text' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
+                <input type='number' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
                 <div class="input-group-append" (click)='orderItem(menuItem)'>
-                  <span class="input-group-text">Order</span>
+                  <span class="input-group-text"  style='font-size: .7em; font-weight: bold'>Order</span>
                 </div>
               </div>
             </div>

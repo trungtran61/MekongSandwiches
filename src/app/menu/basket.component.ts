@@ -14,7 +14,8 @@ import { Router, RouterStateSnapshot } from '@angular/router';
 })
 export class BasketComponent implements OnInit, OnDestroy {
 
-  subscription: Subscription;
+  subscription: Subscription;  
+  instructionsSubscription : Subscription;
   basketItems: BasketItem[] = [];
   basketTotal: number = 0;
   basketTotals: string = '';
@@ -25,9 +26,17 @@ export class BasketComponent implements OnInit, OnDestroy {
     private basketService: BasketService,   
     private router: Router) {
 
-    this.subscription = this.basketService.getMessage().subscribe(basketItem => {
-      //console.log(basketItem);
-      this.addToBasket(basketItem.basketItem);
+    // subscribe to send event from Menu component -- occurs when menu item is selected to be added to basket 
+    this.subscription = this.basketService.getMenuItem().subscribe(item => {     
+      console.log(item);
+      this.addToBasket(item.basketItem);
+    });
+
+    // subscribe to send event from MenuItemOtions component -- occurs when instructions are updated for a basket item
+    this.instructionsSubscription = this.basketService.getInstructions().subscribe(basketItem => { 
+      console.log(basketItem.item);
+      this.basketItems[basketItem.index] = basketItem; 
+      localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));        
     });
   }
 
@@ -64,20 +73,23 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   addToBasket(basketItem: BasketItem) {
     //let basketItem: BasketItem = Object.assign(new BasketItem(), menuItem);
-    console.log(basketItem);
     this.basketItems.push(basketItem);
     localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
+    this.calculateTotals();
   }
 
   calculateTotals() {
     this.basketTotal = 0;
     this.basketItems.forEach(x => this.basketTotal += x.qty * x.price);
     this.basketTotal += Math.round(this.basketTotal * .08);      // plus tax
-    this.basketTotals = this.basketTotal.toFixed(2);
+    this.basketTotals = this.basketTotal.toFixed(2);    
   }
 
-  openBasketItemOptions(menuItem: BasketItem) {
-    this.modalDataService.data = menuItem;
+  openBasketItemOptions(basketItems: BasketItem[], index) {  
+    // pass basket items and index to data  
+    let basketItem: BasketItem = basketItems[index] ;
+    basketItem.index = index;
+    this.modalDataService.data = basketItem;
     const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
   }
 

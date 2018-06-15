@@ -1,4 +1,4 @@
-<div class="container" *ngIf='basketItems != null'>
+<div class="container" *ngIf='basketItems != null && basketItems.length > 0'>
   <div class='card' style='float: left; width: 80%;'>
     <div class="card-header">
       <img src='assets/images/mekongsandwiches.PNG' style='height:40px'>
@@ -36,7 +36,7 @@
               </div>
             </td>
             <td>
-              <button class="btn btn-default" (click)='openBasketItemOptions(basketItem)' [tooltip]="formatInstructions(basketItem)">Special Instructions</button>
+              <button class="btn btn-default" (click)='openBasketItemOptions(basketItems, i)' [tooltip]="formatInstructions(basketItem)">Special Instructions</button>
             </td>
           </tr>
 

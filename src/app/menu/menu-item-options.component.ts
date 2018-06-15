@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ModalDataService } from '../shared/modal-data.service';
 import { MenuItem, BasketItem, ItemOption } from './menu';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -46,7 +46,7 @@ export class MenuItemOptionsComponent implements OnInit {
   itemPrice = [];
   isActiveOption = [];
   meat = ['Head Cheese', 'Meat', 'Jambon', 'Pork Belly', 'Pork Roll', 'Egg']
-
+  
   ngOnInit() {
     this.basketItem = this.modalDataService.data;
 
@@ -97,6 +97,7 @@ export class MenuItemOptionsComponent implements OnInit {
         }
         else{
           itemOption.price = this.itemPrice[index];
+          this.basketItem.price +=  +itemOption.price;          
         }
         this.selectedOptions.push(itemOption);
       }
@@ -104,7 +105,8 @@ export class MenuItemOptionsComponent implements OnInit {
   }
 
   removeSelectedOptionItem(index: number) {
-    this.selectedOptions.splice(index, 1);
+    this.basketItem.price -=  +this.selectedOptions[index].price;    
+    this.selectedOptions.splice(index, 1);    
   }
 
   closeModal() {
@@ -113,7 +115,10 @@ export class MenuItemOptionsComponent implements OnInit {
 
   saveOptions() {
     this.basketItem.instructions = this.selectedOptions;
-    this.modalDataService.data = this.basketItem;
+    // -- commented out since the below will update the basket-- this.modalDataService.data = this.basketItem;   
+    // tell subscribers basket item's instructions were updated
+    console.log(this.basketItem.price);
+    this.basketService.sendInstructions(this.basketItem); 
     this.bsModalRef.hide();
     this.router.navigate(['/main']);
   }

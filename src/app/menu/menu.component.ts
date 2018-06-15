@@ -35,10 +35,9 @@ export class MenuComponent implements OnInit {
   }
 
   orderItem(menuItem: MenuItem) {
-    this.basketItem = Object.assign(new BasketItem(), menuItem);
-    //this.basketItems.push(basketItem);    
-    //localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));      
-    this.basketService.sendMessage(this.basketItem);
+    this.basketItem = Object.assign(new BasketItem(), menuItem);    
+    this.basketService.sendMenuItem(this.basketItem);
+    //this.basketService.sendMessage(this.basketItem);
   }
 
   clearMessage(): void {

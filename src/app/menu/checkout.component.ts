@@ -15,6 +15,7 @@ export class CheckoutComponent implements OnInit {
   phone: string = '';
   infoMessage: string = '';
   errorMessage: string = '';
+  saveOrder: boolean = true;
   pickUpDate: Date = new Date();
   pickUpTime: Date = new Date(new Date().getTime() + 10 * 60000);  //default pickup time is 10 minutes from now
 
@@ -67,5 +68,7 @@ export class CheckoutComponent implements OnInit {
   onSaveComplete(userId): void {
     this.infoMessage = 'Your order has been submitted. Please pick up at your convenience.'
     this.errorMessage = '';
+    if (!this.saveOrder)
+      localStorage.removeItem("MekongSandwichesBasket");
   }
 }
