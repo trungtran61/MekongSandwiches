@@ -42,56 +42,19 @@ export class BasketComponent implements OnInit, OnDestroy {
     // unsubscribe to ensure no memory leaks   
   }
 
-  ngOnInit() {
-    this.basketItems = JSON.parse(localStorage.getItem("MekongSandwichesBasket"));
-
-    if (!this.basketItems)
-      this.basketItems = [];
-    else
-      this.calculateTotals();
+  ngOnInit() {   
   }
 
-  removeItem(index: number) {
-    this.basketItems.splice(index, 1);
-    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
-    this.calculateTotals();
-}
-
-  public removeCartItem(item: BasketItem) {
+  removeCartItem(item: BasketItem) {
     this.cartService.removeFromCart(item)
-  }
-
-  updateQty(index: number) {
-    if (this.basketItems[index].qty == 0) {
-      this.removeItem(index);
-    }
-    else {
-      this.calculateTotals();
-    }
-    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
   }
 
   updateItemQty(item: BasketItem) {
     if (item.qty == 0) {
       this.cartService.removeFromCart(item)
-    }   
-    
+    }       
   }
-
-  addToBasket(basketItem: BasketItem) {
-    //let basketItem: BasketItem = Object.assign(new BasketItem(), menuItem);
-    this.basketItems.push(basketItem);
-    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
-    this.calculateTotals();
-  }
-
-  calculateTotals() {
-    this.basketTotal = 0;
-    this.basketItems.forEach(x => this.basketTotal += x.qty * x.price);
-    this.basketTotal += Math.round(this.basketTotal * .08);      // plus tax
-    this.basketTotals = this.basketTotal.toFixed(2);    
-  }
-
+  
   openBasketItemOptions(basketItems: BasketItem[], index) {  
     // pass basket items and index to data  
     let basketItem: BasketItem = basketItems[index] ;
