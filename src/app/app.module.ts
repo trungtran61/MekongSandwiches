@@ -33,7 +33,7 @@ import { CustomFormsModule } from 'ng2-validation'
     TooltipModule.forRoot(),
     CustomFormsModule 
   ],
-  providers: [BsModalService, ModalDataService],  
+  providers: [BsModalService, ModalDataService, Location],  
   bootstrap: [AppComponent]  
 })
 export class AppModule { }

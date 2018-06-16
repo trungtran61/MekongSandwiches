@@ -5,6 +5,7 @@
     <li class="nav-item"><a routerLink="/contact" class="nav-link">Contact</a></li>
   </ul>
 </nav>
+<i class="fa fa-shopping-cart">{{ (cartItems$ | async).length}}</i>
 <div class="container body-content">
   <router-outlet></router-outlet>   
 </div>

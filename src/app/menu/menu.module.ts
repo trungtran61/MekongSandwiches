@@ -9,10 +9,10 @@ import { MenuItemOptionsComponent } from './menu-item-options.component';
 import { MenuComponent } from './menu.component';
 import { MainComponent } from './main.component';
 import { BasketComponent } from './basket.component';
-import { BasketService } from './basket.service';
 import { CheckoutComponent } from './checkout.component';
 import { CustomerInfoComponent } from './customer-info.component';
 import { MenuService } from './menu.service';
+import { CartService } from './cart.service';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { MenuService } from './menu.service';
   ],
   exports: [MenuComponent, BasketComponent],
   declarations: [MenuItemOptionsComponent, MenuComponent, BasketComponent, CheckoutComponent, CustomerInfoComponent, MainComponent],
-  providers: [BasketService, MenuService],
+  providers: [MenuService, CartService],
   entryComponents: [ MenuItemOptionsComponent ]
 })
 export class MenuModule { }

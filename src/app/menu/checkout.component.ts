@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketItem, Order, OrderItem, ItemOption } from './menu';
 import { MenuService } from './menu.service';
+import { CartService } from './cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -9,13 +10,13 @@ import { MenuService } from './menu.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private orderService: MenuService) { }
+  constructor(private orderService: MenuService,
+  private cartService: CartService) { }
 
   name: string = '';
   phone: string = '';
   infoMessage: string = '';
   errorMessage: string = '';
-  saveOrder: boolean = true;
   pickUpDate: Date = new Date();
   pickUpTime: Date = new Date(new Date().getTime() + 10 * 60000);  //default pickup time is 10 minutes from now
 
@@ -68,7 +69,8 @@ export class CheckoutComponent implements OnInit {
   onSaveComplete(userId): void {
     this.infoMessage = 'Your order has been submitted. Please pick up at your convenience.'
     this.errorMessage = '';
-    if (!this.saveOrder)
-      localStorage.removeItem("MekongSandwichesBasket");
+
+    this.cartService.saveCartToStorage();
+    this.cartService.clearCart();          
   }
 }

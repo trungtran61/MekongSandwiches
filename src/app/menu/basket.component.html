@@ -1,4 +1,4 @@
-<div class="container" *ngIf='basketItems != null && basketItems.length > 0'>
+<div class="container" *ngIf='cartItems != null && cartItems.length > 0'>
   <div class='card' style='float: left; width: 80%;'>
     <div class="card-header">
       <img src='assets/images/mekongsandwiches.PNG' style='height:40px'>
@@ -17,26 +17,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let basketItem of basketItems; let i = index'>
+          <tr *ngFor='let item of cartItems; let i = index'>
             <td>
-              <strong>{{ '#' + basketItem.id + ' - ' + basketItem.name }}</strong>
+              <strong>{{ '#' + item.id + ' - ' + item.name }}</strong>
             </td>
-            <td>{{ basketItem.price | number: '1.2-2' | currency:'USD' }}</td>
-            <td>{{ basketItem.qty }}</td>
+            <td>{{ item.price | number: '1.2-2' | currency:'USD' }}</td>
+            <td>{{ item.qty }}</td>
             <td style="text-align: right;">
-              <strong>{{ (basketItem.price * basketItem.qty) | number: '1.2-2' | currency:'USD' }}</strong>
+              <strong>{{ (item.price * item.qty) | number: '1.2-2' | currency:'USD' }}</strong>
             </td>
             <td>
               <div class="input-group">
-                <input type='number' style="width: 2em" class="form-control" [(ngModel)]='basketItem.qty' (change)='updateQty(i)' />
-                <div class="input-group-append" (click)='removeItem(i)'>
+                <input type='number' style="width: 2em" class="form-control" [(ngModel)]='item.qty' (change)='updateItemQty(item)' />
+                <div class="input-group-append" (click)='removeCartItem(item)'>
                   <span class="input-group-text">Remove</span>
                   <i class="fa fa-user-circle-o"></i>
                 </div>
               </div>
             </td>
             <td>
-              <button class="btn btn-default" (click)='openBasketItemOptions(basketItems, i)' [tooltip]="formatInstructions(basketItem)">Special Instructions</button>
+              <button class="btn btn-default" (click)='openCartItemOptions(item)' [tooltip]="formatInstructions(item)">Special Instructions</button>
             </td>
           </tr>
 
@@ -45,7 +45,7 @@
       <div class="card-footer">
         <div class="row">
           <div class='col-sm-10'>
-            <strong>Totals (includes tax): {{ basketTotals | number: '1.2-2' | currency:'USD' }}</strong>
+            <strong>Totals (includes tax): {{getTotalAmount() | async | number: '1.2-2' | currency:'USD' }}</strong>
           </div>
           <div class='col-sm-2'>
             <button class="btn btn-primary" (click)='checkOut()' *ngIf="router.url != '/checkout'">Check Out</button>            

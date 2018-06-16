@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ModalDataService } from '../shared/modal-data.service';
-import { MenuItem, BasketItem, ItemOption } from './menu';
+import { BasketItem, ItemOption } from './menu';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { BasketService } from './basket.service';
+import { CartService } from './cart.service';
 
 @Component({
   selector: 'app-menu-item-options',
@@ -13,7 +13,7 @@ import { BasketService } from './basket.service';
 export class MenuItemOptionsComponent implements OnInit {
 
   constructor(private modalDataService: ModalDataService,
-    private bsModalRef: BsModalRef, private basketService: BasketService,
+    private bsModalRef: BsModalRef, private basketService: CartService,
     private router: Router) { }
 
   options = ['No', 'Extra', 'Less', 'Add', 'On The Side'];
@@ -115,9 +115,6 @@ export class MenuItemOptionsComponent implements OnInit {
 
   saveOptions() {
     this.basketItem.instructions = this.selectedOptions;
-    // -- commented out since the below will update the basket-- this.modalDataService.data = this.basketItem;   
-    // tell subscribers basket item's instructions were updated
-    console.log(this.basketItem.price);
     this.basketService.sendInstructions(this.basketItem); 
     this.bsModalRef.hide();
     this.router.navigate(['/main']);

@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, HostListener, OnDestroy } from '@angular/core';
+import {of} from 'rxjs/observable/of';
+
 import { BasketItem, MenuItem } from './menu';
 import { ModalDataService } from '../shared/modal-data.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MenuItemOptionsComponent } from './menu-item-options.component';
-import { BasketService } from './basket.service';
-import { Subscription } from 'rxjs';
-import { Router, RouterStateSnapshot } from '@angular/router';
+import { Subscription, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { CartService } from './cart.service';
 
 @Component({
   selector: 'app-basket',
@@ -20,33 +22,27 @@ export class BasketComponent implements OnInit, OnDestroy {
   basketTotal: number = 0;
   basketTotals: string = '';
   message: string;
+  cartItems$: Observable<BasketItem[]> = of([]);
+  cartItems: BasketItem[] = [];
+ 
 
   constructor(private modalService: BsModalService,
     private modalDataService: ModalDataService,
-    private basketService: BasketService,   
+    private cartService: CartService,  
     private router: Router) {
 
-    // subscribe to send event from Menu component -- occurs when menu item is selected to be added to basket 
-    this.subscription = this.basketService.getMenuItem().subscribe(item => {     
-      console.log(item);
-      this.addToBasket(item.basketItem);
-    });
+    this.cartItems$ = this
+      .cartService
+      .getItems();
 
-    // subscribe to send event from MenuItemOtions component -- occurs when instructions are updated for a basket item
-    this.instructionsSubscription = this.basketService.getInstructions().subscribe(basketItem => { 
-      console.log(basketItem.item);
-      this.basketItems[basketItem.index] = basketItem; 
-      localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));        
-    });
+    this.cartItems$.subscribe(_ => this.cartItems = _);  
   }
 
   ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.subscription.unsubscribe();
+    // unsubscribe to ensure no memory leaks   
   }
 
   ngOnInit() {
-    console.log(this.router.url);
     this.basketItems = JSON.parse(localStorage.getItem("MekongSandwichesBasket"));
 
     if (!this.basketItems)
@@ -59,6 +55,10 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.basketItems.splice(index, 1);
     localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
     this.calculateTotals();
+}
+
+  public removeCartItem(item: BasketItem) {
+    this.cartService.removeFromCart(item)
   }
 
   updateQty(index: number) {
@@ -69,6 +69,13 @@ export class BasketComponent implements OnInit, OnDestroy {
       this.calculateTotals();
     }
     localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
+  }
+
+  updateItemQty(item: BasketItem) {
+    if (item.qty == 0) {
+      this.cartService.removeFromCart(item)
+    }   
+    
   }
 
   addToBasket(basketItem: BasketItem) {
@@ -91,6 +98,15 @@ export class BasketComponent implements OnInit, OnDestroy {
     basketItem.index = index;
     this.modalDataService.data = basketItem;
     const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
+  }
+
+  openCartItemOptions(item: BasketItem) {     
+    this.modalDataService.data = item;
+    const modal = this.modalService.show(MenuItemOptionsComponent, { 'class': 'modal-dialog-primary modal-lg' });
+  }
+
+  getTotalAmount(): Observable<number> {
+    return this.cartService.getTotalAmount();
   }
 
   formatInstructions(basketItem: BasketItem) {
