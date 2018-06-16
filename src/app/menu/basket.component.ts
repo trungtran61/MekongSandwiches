@@ -18,14 +18,10 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;  
   instructionsSubscription : Subscription;
-  basketItems: BasketItem[] = [];
-  basketTotal: number = 0;
-  basketTotals: string = '';
   message: string;
   cartItems$: Observable<BasketItem[]> = of([]);
   cartItems: BasketItem[] = [];
  
-
   constructor(private modalService: BsModalService,
     private modalDataService: ModalDataService,
     private cartService: CartService,  
@@ -87,7 +83,7 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   checkOut()
   {
-    localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
+    //localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
     this.router.navigate(['/checkout']);
   }
 }

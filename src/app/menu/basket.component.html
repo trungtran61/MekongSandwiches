@@ -28,10 +28,9 @@
             </td>
             <td>
               <div class="input-group">
-                <input type='number' style="width: 2em" class="form-control" [(ngModel)]='item.qty' (change)='updateItemQty(item)' />
-                <div class="input-group-append" (click)='removeCartItem(item)'>
-                  <span class="input-group-text">Remove</span>
-                  <i class="fa fa-user-circle-o"></i>
+                <input type='number' style="width: 2em" class="form-control numberInput" [(ngModel)]='item.qty' (change)='updateItemQty(item)' />
+                <div class="orderButtonIcon" (click)='removeCartItem(item)'>                  
+                  <i class="fa fa-trash-o fa-lg fa-pull-right fa-border"></i>
                 </div>
               </div>
             </td>

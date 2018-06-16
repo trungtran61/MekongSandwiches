@@ -54,3 +54,23 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+
+.orderButtonIcon
+{
+    padding: 10px 10px 10px 5px;   
+}
+.orderButtonIconDisabled
+{
+    display: none;
+}
+.fa-border
+{
+    border-color: darkgray;
+}
+
+.numberInput
+{
+    text-align: right;
+    width: 2em;
+}
+

@@ -1,11 +1,21 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <ul class="navbar-nav mr-auto">
-    <li class="nav-item active"><a routerLink="/home" class="nav-link">Home</a></li>
-    <li class="nav-item"><a routerLink="/main" class="nav-link">Menu</a></li>
-    <li class="nav-item"><a routerLink="/contact" class="nav-link">Contact</a></li>
+    <li class="nav-item active">
+      <a routerLink="/home" class="nav-link">Home</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/main" class="nav-link">Menu</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/contact" class="nav-link">Contact</a>
+    </li>
   </ul>
 </nav>
-<i class="fa fa-shopping-cart">{{ (cartItems$ | async).length}}</i>
-<div class="container body-content">
-  <router-outlet></router-outlet>   
+
+<div class="container">
+    <div style="float: right; padding: 10px; min-height: 45px;">
+        <i *ngIf='cartItems.length > 0' class="fa fa-shopping-cart" > ({{ (cartItems$ | async).length}}) {{getTotalAmount() | async | number: '1.2-2' | currency:'USD' }} </i>
+      </div>
+      <div style="clear: both"></div>
+  <router-outlet></router-outlet>
 </div>

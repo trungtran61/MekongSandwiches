@@ -7,6 +7,7 @@ import { BasketItem } from './menu';
 import { environment } from '../../environments/environment';
 @Injectable()
 export class CartService {
+    private itemNumber: number = 0;
     private subject = new Subject<any>();
     private instructionSubject = new Subject<any>();
 
@@ -18,12 +19,14 @@ export class CartService {
     }
 
     public addToCart(item: BasketItem) {
+        item.index =  this.itemNumber;
+        this.itemNumber++;
         this.itemsInCartSubject.next([...this.itemsInCart, item]);
     }
 
     public removeFromCart(item: BasketItem) {
         const currentItems = [...this.itemsInCart];
-        const itemsWithoutRemoved = currentItems.filter(_ => _.id !== item.id);
+        const itemsWithoutRemoved = currentItems.filter(_ => _.index !== item.index);
         this.itemsInCartSubject.next(itemsWithoutRemoved);
     }
 

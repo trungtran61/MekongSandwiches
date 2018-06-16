@@ -1,4 +1,4 @@
-<div class="container mb-3 mt-3" style='font-size: .9em'>
+<div class="container mb-3 mt-3">
   <div class="card">
     <div class="card-header">
       <img src='assets/images/mekongsandwiches.PNG' style='height:40px'>
@@ -21,10 +21,9 @@
             </div>
             <div class="col-sm-3">
               <div class="input-group mb-3 order">
-                <input type='number' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
-                <div class="input-group-append" (click)='orderItem(menuItem)'>
-                  <span class="input-group-text" style='font-size: .7em; font-weight: bold'>Order</span>
-                  <i class="fa fa-user-circle-o"></i>
+                <input type='number' class="form-control numberInput" [(ngModel)]='menuItem.qty' />
+                <div (click)='orderItem(menuItem)' [ngClass]="{'orderButtonIcon': menuItem.qty > 0, 'orderButtonIconDisabled': menuItem.qty == 0 || menuItem.qty == null}">                  
+                  <i class="fa fa-cart-plus fa-lg fa-pull-right"></i>
                 </div>
               </div>
             </div>
@@ -47,9 +46,9 @@
             </div>
             <div class="col-sm-3">
               <div class="input-group mb-3 order">
-                <input type='number' style="width: 1em" class="form-control" [(ngModel)]='menuItem.qty' />
-                <div class="input-group-append" (click)='orderItem(menuItem)'>
-                  <span class="input-group-text"  style='font-size: .7em; font-weight: bold'>Order</span>
+                <input type='number' class="form-control numberInput" [(ngModel)]='menuItem.qty' />
+                <div (click)='orderItem(menuItem)' [ngClass]="{'orderButtonIcon': menuItem.qty > 0, 'orderButtonIconDisabled': menuItem.qty == 0 || menuItem.qty == null}">                  
+                  <i class="fa fa-cart-plus fa-lg fa-pull-right"></i>
                 </div>
               </div>
             </div>

@@ -11,7 +11,8 @@ import { CartService } from './menu/cart.service';
 })
 export class AppComponent {
   title = 'app';
-
+  cartItems: BasketItem[] = [];
+  cartTotal: number = 0;
   cartItems$: Observable<BasketItem[]>;
 
   constructor(private cartService: CartService) {
@@ -20,6 +21,15 @@ export class AppComponent {
       .cartService
       .getItems();
 
-    this.cartItems$.subscribe(_ => _);
+    //this.cartItems$.subscribe(_ => _);
+    this.cartItems$.subscribe( cartItems => 
+      {
+      this.cartItems = cartItems;      
+      }
+    ); 
+  }
+
+  getTotalAmount(): Observable<number> {
+    return this.cartService.getTotalAmount();
   }
 }
