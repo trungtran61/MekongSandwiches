@@ -14,7 +14,7 @@
 
 <div class="container">
     <div style="float: right; padding: 10px; min-height: 45px;">
-        <i *ngIf='cartItems.length > 0' class="fa fa-shopping-cart" > ({{ (cartItems$ | async).length}}) {{getTotalAmount() | async | number: '1.2-2' | currency:'USD' }} </i>
+        <i *ngIf='cartItems.length > 0' class="fa fa-shopping-cart" > ({{ (cartItems$ | async).length}}) {{getTotalAmount() | async | currency:'USD' }} </i>
       </div>
       <div style="clear: both"></div>
   <router-outlet></router-outlet>

@@ -21,18 +21,17 @@
             <td>
               <strong>{{ '#' + item.id + ' - ' + item.name }}</strong>
             </td>
-            <td>{{ item.price | number: '1.2-2' | currency:'USD' }}</td>
-            <td>{{ item.qty }}</td>
-            <td style="text-align: right;">
-              <strong>{{ (item.price * item.qty) | number: '1.2-2' | currency:'USD' }}</strong>
-            </td>
+            <td>{{ item.price | currency:'USD' }}</td>
             <td>
-              <div class="input-group">
-                <input type='number' style="width: 2em" class="form-control numberInput" [(ngModel)]='item.qty' (change)='updateItemQty(item)' />
+            <input type='number' style="width: 4em" class="form-control numberInput" [(ngModel)]='item.qty' (change)='updateItemQty(item)' />
+          </td>
+            <td style="text-align: right;">
+              <strong>{{ (item.price * item.qty) | currency:'USD' }}</strong>
+            </td>
+            <td>                
                 <div class="orderButtonIcon" (click)='removeCartItem(item)'>                  
                   <i class="fa fa-trash-o fa-lg fa-pull-right fa-border"></i>
-                </div>
-              </div>
+                </div>              
             </td>
             <td>
               <button class="btn btn-default" (click)='openCartItemOptions(item)' [tooltip]="formatInstructions(item)">Special Instructions</button>
@@ -44,7 +43,7 @@
       <div class="card-footer">
         <div class="row">
           <div class='col-sm-10'>
-            <strong>Totals (includes tax): {{getTotalAmount() | async | number: '1.2-2' | currency:'USD' }}</strong>
+            <strong>Totals (includes tax): {{getTotalAmount() | async | currency:'USD' }}</strong>
           </div>
           <div class='col-sm-2'>
             <button class="btn btn-primary" (click)='checkOut()' *ngIf="router.url != '/checkout'">Check Out</button>            
