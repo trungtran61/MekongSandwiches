@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketItem, Order, OrderItem, ItemOption } from './menu';
+import { BasketItem, Order, OrderItem, ItemOption, ContactInfo } from './menu';
 import { MenuService } from './menu.service';
 import { CartService } from './cart.service';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-checkout',
@@ -11,7 +13,14 @@ import { CartService } from './cart.service';
 export class CheckoutComponent implements OnInit {
 
   constructor(private orderService: MenuService,
-  private cartService: CartService) { }
+    private cartService: CartService) {
+
+    this.cartItems$ = this
+      .cartService
+      .getItems();
+
+    this.cartItems$.subscribe(_ => this.cartItems = _);
+  }
 
   name: string = '';
   phone: string = '';
@@ -19,24 +28,31 @@ export class CheckoutComponent implements OnInit {
   errorMessage: string = '';
   pickUpDate: Date = new Date();
   pickUpTime: Date = new Date(new Date().getTime() + 10 * 60000);  //default pickup time is 10 minutes from now
+  cartItems$: Observable<BasketItem[]> = of([]);
+  cartItems: BasketItem[] = [];
 
   ngOnInit() {
-    //this.pickUpTime = new Date(new Date().getTime() + 5*60000);
+    let contactInfo: ContactInfo = this.cartService.getContactInfo();
+
+    if (contactInfo) {
+      this.name = contactInfo.name;
+      this.phone = contactInfo.phone;
+    }
   }
 
   submitOrder() {
-    let orderItems: OrderItem[] = JSON.parse(localStorage.getItem("MekongSandwichesBasket"));
-    console.log(orderItems);
+    //let orderItems: OrderItem[] = JSON.parse(localStorage.getItem("MekongSandwichesBasket"));
+
+    console.log(this.cartItems);
     let order: Order = new Order();
     //order.id = 5;
     order.name = this.name;
     order.phone = this.phone;
     order.pickUpTime = this.pickUpTime.toTimeString();
-    console.log(order.pickUpTime);
     order.pickUpDate = this.pickUpDate;
     order.orderItems = [];
 
-    orderItems.forEach(function (orderItem) {
+    this.cartItems.forEach(function (orderItem) {
       let item: OrderItem = new OrderItem();
       item.id = orderItem.id;
       item.name = orderItem.name;
@@ -51,8 +67,6 @@ export class CheckoutComponent implements OnInit {
       }
       order.orderItems.push(item);
     });
-
-    console.log(order);
 
     this.orderService.addOrder(order)
       .subscribe(
@@ -71,6 +85,11 @@ export class CheckoutComponent implements OnInit {
     this.errorMessage = '';
 
     this.cartService.saveCartToStorage();
-    this.cartService.clearCart();          
+
+    let contactInfo: ContactInfo = new ContactInfo();
+    contactInfo.name = this.name;
+    contactInfo.phone = this.phone;
+    this.cartService.saveContactInfo(contactInfo)
+    this.cartService.clearCart();
   }
 }

@@ -27,6 +27,11 @@ export class ItemOption {
     price: number = 0.00;
 }
 
+export class ContactInfo {
+    name: string = "";
+    phone: string = "";    
+}
+
 export class Order {
     id: number;
     name: string;

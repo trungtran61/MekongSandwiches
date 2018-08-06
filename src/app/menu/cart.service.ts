@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, Subject, Subscriber } from 'rxjs';
 //import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 
-import { BasketItem } from './menu';
+import { BasketItem, ContactInfo } from './menu';
 import { environment } from '../../environments/environment';
 @Injectable()
 export class CartService {
@@ -16,6 +16,13 @@ export class CartService {
 
     constructor() {
         this.itemsInCartSubject.subscribe(_ => this.itemsInCart = _);
+    }
+
+    public loadPreviousCart(): Observable<BasketItem[]>
+    {        
+        this.itemsInCartSubject = JSON.parse(localStorage.getItem("PreviousOrder"));
+        console.log(this.itemsInCartSubject);
+        return this.itemsInCartSubject.asObservable();
     }
 
     public addToCart(item: BasketItem) {
@@ -70,7 +77,19 @@ export class CartService {
 
     saveCartToStorage()
     {
-        localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.itemsInCart));
+        localStorage.setItem("PreviousOrder", JSON.stringify(this.itemsInCart));        
+    }
+
+    saveContactInfo(contactInfo : ContactInfo)
+    {
+        localStorage.setItem("ContactInfo", JSON.stringify(contactInfo));
+    }
+
+    getContactInfo() 
+    {
+        let contactInfo : ContactInfo = new ContactInfo();
+        contactInfo = JSON.parse(localStorage.getItem("ContactInfo"));
+        return contactInfo;        
     }
 
     clearCart()

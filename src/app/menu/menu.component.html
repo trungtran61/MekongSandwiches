@@ -21,7 +21,7 @@
             </div>
             <div class="col-sm-3">
               <div class="input-group mb-3 order">
-                <input type='number' class="form-control numberInput" [(ngModel)]='menuItem.qty' />
+                <input type='number' class="form-control numberInput" [(ngModel)]='menuItem.qty' placeholder="Order Qty" />
                 <div (click)='orderItem(menuItem)' [ngClass]="{'orderButtonIcon': menuItem.qty > 0, 'orderButtonIconDisabled': menuItem.qty == 0 || menuItem.qty == null}">                  
                   <i class="fa fa-cart-plus fa-lg fa-pull-right"></i>
                 </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-sm-3">
               <div class="input-group mb-3 order">
-                <input type='number' class="form-control numberInput" [(ngModel)]='menuItem.qty' />
+                <input type='number' class="form-control numberInput" [(ngModel)]='menuItem.qty' placeholder="Order Qty" />
                 <div (click)='orderItem(menuItem)' [ngClass]="{'orderButtonIcon': menuItem.qty > 0, 'orderButtonIconDisabled': menuItem.qty == 0 || menuItem.qty == null}">                  
                   <i class="fa fa-cart-plus fa-lg fa-pull-right"></i>
                 </div>

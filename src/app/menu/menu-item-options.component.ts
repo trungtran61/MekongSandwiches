@@ -3,6 +3,8 @@ import { ModalDataService } from '../shared/modal-data.service';
 import { BasketItem, ItemOption } from './menu';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { CartService } from './cart.service';
 
 @Component({
@@ -14,6 +16,7 @@ export class MenuItemOptionsComponent implements OnInit {
 
   constructor(private modalDataService: ModalDataService,
     private bsModalRef: BsModalRef, private basketService: CartService,
+    private location: Location,
     private router: Router) { }
 
   options = ['No', 'Extra', 'Less', 'Add', 'On The Side'];
@@ -117,6 +120,7 @@ export class MenuItemOptionsComponent implements OnInit {
     this.basketItem.instructions = this.selectedOptions;
     this.basketService.sendInstructions(this.basketItem); 
     this.bsModalRef.hide();
-    this.router.navigate(['/main']);
+    this.location.back();
+    //this.router.navigate(['/main']);
   }
 }

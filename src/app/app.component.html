@@ -14,7 +14,9 @@
 
 <div class="container">
     <div style="float: right; padding: 10px; min-height: 45px;">
-        <i *ngIf='cartItems.length > 0' class="fa fa-shopping-cart" > ({{ (cartItems$ | async).length}}) {{getTotalAmount() | async | currency:'USD' }} </i>
+        <a routerLink="/cart" class="nav-link">
+          <i *ngIf='cartItems.length > 0' class="fa fa-shopping-cart" > ({{ (cartItems$ | async).length}}) {{getTotalAmount() | async | currency:'USD' }} </i>
+        </a>
       </div>
       <div style="clear: both"></div>
   <router-outlet></router-outlet>

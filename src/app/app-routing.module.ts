@@ -5,6 +5,7 @@ import { MainComponent } from './menu/main.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { ContactComponent } from './contact.component';
 import { CheckoutComponent } from './menu/checkout.component';
+import { BasketComponent } from './menu/basket.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   { 
     path: 'checkout', 
     component: CheckoutComponent
+  }, 
+  { 
+    path: 'cart', 
+    component: BasketComponent
   },  
   { 
     path: 'contact', 

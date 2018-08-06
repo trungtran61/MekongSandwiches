@@ -86,4 +86,11 @@ export class BasketComponent implements OnInit, OnDestroy {
     //localStorage.setItem("MekongSandwichesBasket", JSON.stringify(this.basketItems));
     this.router.navigate(['/checkout']);
   }
+
+  loadPreviousCart()
+  {
+    this.cartItems$ = this
+      .cartService
+      .loadPreviousCart();
+  }
 }
